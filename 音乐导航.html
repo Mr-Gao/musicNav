@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 640px;
+            margin: 100px auto;
+        }
+        li {
+            float: left;
+            width: 78px;
+            height: 30px;
+            border: 1px solid #ccc;
+            margin-left: -1px;
+            position: relative;
+            overflow: hidden;
+        }
+        span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+        }
+        i {
+            position: absolute;
+            width: 78px;
+            height: 30px;
+            left: 0;
+            bottom: -30px;
+        }
+        .clearfix {
+            clear: both;
+        }
+        p {
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li><span>1</span><i></i></li>
+    <li><span>2</span><i></i></li>
+    <li><span>3</span><i></i></li>
+    <li><span>4</span><i></i></li>
+    <li><span>5</span><i></i></li>
+    <li><span>6</span><i></i></li>
+    <li><span>7</span><i></i></li>
+    <li><span>8</span><i></i></li>
+</ul>
+<div class="clearfix"></div>
+<p>
+    欢乐颂
+    3345 5432 1123 322-
+
+    3345 5432 1123 211-
+
+    2231 2 34 31 2 34 32 12(5)3
+
+    3345 54 34 2 1123 211-
+</p>
+
+
+
+<p>
+    小星星
+    1 1 5 5 6 6 5－ 4 4 3 3 2 2 1－
+
+    5 5 4 4 3 3 2－ 5 5 4 4 3 3 2－
+
+    1 1 5 5 6 6 5－ 4 4 3 3 2 2 1－
+</p>
+
+<p>
+    生日快乐
+    55 65 87- 55 65 21-
+
+    55 53 176- 44 31 21-
+</p>
+
+<p>
+    我是一个粉刷匠
+    5353531 24325 5353531 24321
+
+    2244315 24325 5353531 24321
+</p>
+
+<audio src="music/m/1.mp3"></audio>
+<audio src="music/m/2.mp3"></audio>
+<audio src="music/m/3.mp3"></audio>
+<audio src="music/m/4.mp3"></audio>
+<audio src="music/m/5.mp3"></audio>
+<audio src="music/m/6.mp3"></audio>
+<audio src="music/m/7.mp3"></audio>
+<audio src="music/m/8.mp3"></audio>
+
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+
+    var audios = document.querySelectorAll('audio');
+    var arr = ['red','orange','blue','pink','purple','green','yellow','skyblue'];
+
+    $('i').each(function (i,e) {
+        $(e).css('backgroundColor',arr[i]);
+    });
+
+    $('li').hover(function () {
+        var index = $(this).index();
+//        加载音频文件
+        audios[index].load();
+        audios[index].play();
+        $('li').eq(index).children('i').stop().animate({bottom: 0},300);
+    },function () {
+        var index = $(this).index();
+        $('li').eq(index).children('i').stop().animate({bottom: -30},300);
+    });
+
+
+    $(window).keyup(function (e) {
+        if(e.keyCode >= 97 && e.keyCode <= 104){
+            var index = e.keyCode  - 97;
+            $('li').eq(index).trigger('mouseenter');
+            setTimeout(function () {
+                $('li').eq(index).trigger('mouseleave');
+            },300);
+        }
+
+    })
+
+</script>
+
+</html>
